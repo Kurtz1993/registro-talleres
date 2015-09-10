@@ -1,0 +1,20 @@
+{
+  "name": "registro-talleres",
+  "description": "Registro a los talleres de la semana del médico.",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kurtz1993/registro-talleres.git"
+  },
+  "author": "Luis Rogelio Hernández López",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Kurtz1993/registro-talleres/issues"
+  },
+  "homepage": "https://github.com/Kurtz1993/registro-talleres#readme",
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "express": "^4.13.3",
+    "mongodb": "^2.0.42"
+  }
+}

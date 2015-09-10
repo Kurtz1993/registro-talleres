@@ -1,0 +1,4 @@
+md-toolbar:not(.md-menu-toolbar){
+	background: #ED417B;
+	color: #FFF;
+}
