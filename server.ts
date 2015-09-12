@@ -39,7 +39,6 @@ app.get('/api/workshops', (req, res) => {
 app.get('/api/workshops/:workshop/students', (req, res) => {
   console.log(req.params.workshop)
   Alumnos.find({idTaller: parseInt(req.params.workshop)}).toArray((err, docs) => {
-    console.log(docs);
     if (err) { console.log(err); }
     else { res.send(docs); }
   });
