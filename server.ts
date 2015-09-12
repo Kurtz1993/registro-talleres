@@ -8,13 +8,15 @@ var MongoClient = mongo.MongoClient;
 var dbUrl       = 'mongodb://localhost:27017/semanaMedico';
 var Talleres    = null;
 var Registro    = null;
+var Alumnos     = null;
 
 MongoClient.connect(dbUrl, (err, database) => {
   if (err) {
     console.log(err);
   } else {
-    Talleres = database.collection('talleres');
-    Registro = database.collection('registro');
+    Talleres  = database.collection('talleres');
+    Registro  = database.collection('registro');
+    Alumnos   = database.collection('alumnos');
   }
 });
 
@@ -35,11 +37,16 @@ app.get('/api/workshops', (req, res) => {
 });
 
 app.get('/api/workshops/:workshop/students', (req, res) => {
-  res.send('Hello, world!' + JSON.stringify(req.params));
+  console.log(req.params.workshop)
+  Alumnos.find({idTaller: parseInt(req.params.workshop)}).toArray((err, docs) => {
+    console.log(docs);
+    if (err) { console.log(err); }
+    else { res.send(docs); }
+  });
 });
 
 app.post('/api/registrar', (req, res) => {
-  res.send(req.body);
+  res.send(req.params);
 });
 // End API calls...
 

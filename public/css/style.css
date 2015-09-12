@@ -9,3 +9,7 @@ md-card{
 	-ms-border-radius: 5px;
 	border-radius: 5px;
 }
+
+md-dialog{
+	max-width: 100%;
+}

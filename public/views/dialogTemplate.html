@@ -1,0 +1,21 @@
+<md-dialog flex="50" flex-md="75" flex-sm="100" aria-label="Alumnos ya registrados">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Alumnos ya registrados</h2>
+      <span flex></span>
+    </div>
+  </md-toolbar>
+  <md-dialog-content>
+    <md-list>
+      <p ng-if="studentsList.length === 0">No hay alumnos registrados...</p>
+      <md-list-item class="md-3-line" ng-repeat="student in studentsList">
+        <p>{{student.name}}</p>
+      </md-list-item>
+    </md-list>
+  </md-dialog-content>
+  <div class="md-actions" layout="row">
+    <span flex></span>
+    <md-button class="md-primary md-raised" ng-click="dismissDialog()">Ok</md-button>
+    <span flex></span>
+  </div>
+</md-dialog>
