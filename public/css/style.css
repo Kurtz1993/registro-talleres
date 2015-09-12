@@ -13,3 +13,27 @@ md-card{
 md-dialog{
 	max-width: 100%;
 }
+
+@media(min-width: 1200px){
+	.card-margin{
+		margin-right: 8%;
+	}
+}
+
+@media(max-width: 959px){
+	.card-margin{
+		margin-right: 6%;
+	}
+}
+
+@media(max-width: 616px){
+	.card-margin{
+		margin-right: 5%;
+	}
+}
+
+@media(max-width: 599px){
+	.card-margin{
+		margin-right: 8px;
+	}
+}

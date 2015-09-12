@@ -1,6 +1,6 @@
 <div layout="row" layout-sm="column" layout-fill layout-wrap>
-	<md-card ng-repeat="workshop in workshops" class="md-whiteframe-z2" 
-					 layout-padding flex-md="45" flex-sm="95" flex="30">
+	<md-card ng-repeat="workshop in workshops" ng-class-odd="'card-margin'"
+					 class="md-whiteframe-z2" layout-padding flex-md="45" flex-sm="95" flex="45">
 		<md-card-content>
 			<md-toolbar layout="row">
 				<div class="md-toolbar-tools">
@@ -10,11 +10,14 @@
 				</div>
 			</md-toolbar>
 			<h4>Imparte: {{workshop.dr}}</h4>
-			<h6>{{workshop.day}} a las {{workshop.time}}</h6>
+			<h5>{{workshop.day}} a las {{workshop.time}}</h5>
+			<h5>Registrados: {{workshop.current}} / {{workshop.total}}</h5>
+			<h5>Objetivo:</h5>
 			<p>{{workshop.description}}</p>
 			<div layout="row" layout-fill layout-wrap>
 				<md-button class="md-primary md-raised" ng-click="showStudentsList($index, $event)" flex>Ver lista</md-button>
-				<md-button class="md-primary md-raised" ng-click="showRegistration($index, $event)" flex>Regístrate</md-button>
+				<md-button ng-if="workshop.available" 
+				class="md-primary md-raised" ng-click="showRegistration($index, $event)" flex>Regístrate</md-button>
 			</div>
 		</md-card-content>
 	</md-card>

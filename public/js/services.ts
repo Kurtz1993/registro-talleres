@@ -8,7 +8,7 @@ angular.module('AppServices', [])
 				.error((error) => { deferred.reject(error); });
 			return deferred.promise;
 		},
-		getByWorkshopId: (params) =>{
+		getStudentsByWorkshopId: (params) =>{
 			var deferred = $q.defer();
 			$http.get('/api/workshops/' + params.id + '/students')
 				.success((response) => { deferred.resolve(response); })

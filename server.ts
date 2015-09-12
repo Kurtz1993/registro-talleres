@@ -3,12 +3,12 @@ import path       = require('path');
 import mongo      = require('mongodb');
 import bodyParser = require('body-parser');
 
-var app         = express();
-var MongoClient = mongo.MongoClient;
-var dbUrl       = 'mongodb://localhost:27017/semanaMedico';
-var Talleres    = null;
-var Registro    = null;
-var Alumnos     = null;
+var app                           = express();
+var MongoClient                   = mongo.MongoClient;
+var dbUrl:string                  = 'mongodb://localhost:27017/semanaMedico';
+var Talleres:mongo.Collection     = null;
+var Registro:mongo.Collection     = null;
+var Alumnos:mongo.Collection      = null;
 
 MongoClient.connect(dbUrl, (err, database) => {
   if (err) {
@@ -44,7 +44,7 @@ app.get('/api/workshops/:workshop/students', (req, res) => {
 });
 
 app.post('/api/registrar', (req, res) => {
-  res.send(req.params);
+  res.send(req.body);
 });
 // End API calls...
 

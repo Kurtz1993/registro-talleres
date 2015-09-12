@@ -8,14 +8,25 @@ angular.module('AppControllers', [])
 	$scope.workshops = null;
 	$scope.selectedWorkshop = null;
 	
-	Talleres.get().then((res) => { $scope.workshops = res; });
+	Talleres.get().then((res) => {
+		$scope.workshops = res;
+		$scope.workshops.forEach((workshop, index) => {
+			Talleres.getStudentsByWorkshopId({id: workshop._id}).then((res) => {
+				workshop.available = true;
+				workshop.current = res.length;
+				if(workshop.current === workshop.total){
+					workshop.available = false;
+				}
+			});
+		});
+	});
 	
 	// Controller methods
 	$scope.showStudentsList = (workshopIndex, event) => {
-		var id = $scope.workshops[workshopIndex]._id;
+		var id:number = $scope.workshops[workshopIndex]._id;
 		$mdDialog.show({
 			controller: StudentsListCtrl,
-			templateUrl: 'views/dialogTemplate.html',
+			templateUrl: 'views/studentsListTemplate.html',
 			parent: angular.element(document.body),
 			targetEvent: event,
 			locals: {workshopId: id},
@@ -35,8 +46,22 @@ angular.module('AppControllers', [])
 	};
 	
 	$scope.showRegistration = (workshopIndex, event) => {
-		alert(workshopIndex);
-		$scope.selectedWorkshop = workshopIndex;
+		var id:number = $scope.workshops[workshopIndex]._id;
+		$mdDialog.show({
+			controller: StudentsListCtrl,
+			templateUrl: 'views/registrationFormTemplate.html',
+			parent: angular.element(document.body),
+			targetEvent: event,
+			locals: {workshopId: id},
+			bindToController: true,
+			clickOutsideToClose: true
+		});
+		
+		function StudentsListCtrl ($scope, workshopId){
+			$scope.dismissDialog = () => {
+				$mdDialog.hide();
+			};
+		}
 	};
 	
 }])
