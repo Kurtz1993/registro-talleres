@@ -1,0 +1,5 @@
+{_id: 1, name: "Fondo de ojo", dr: "Dr. Jekyll y Mr. Hyde", time: "16:00 - 17:00", day: "Monday"}
+{_id: 2, name: "Cardiología", dr: "Dr. Chpatín", time: "17:00 - 18:00", day: "Monday"}
+{_id: 3, name: "Cirugía", dr: "Jack el Destripador", time: "16:00 - 17:00", day: "Tuesday"})
+{_id: 4, name: "Proctología", dr: "Dr. Dj. Sin Manos", time: "16:00 - 17:00", day: "Wednesday"})
+{_id: 5, name: "Anestesiología", dr: "Dra. Jigglypuff", time: "16:00 - 17:00", day: "Thursday"})

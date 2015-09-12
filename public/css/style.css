@@ -1,4 +1,11 @@
-md-toolbar:not(.md-menu-toolbar){
+.home-title{
 	background: #ED417B;
 	color: #FFF;
+}
+
+md-card{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	border-radius: 5px;
 }

@@ -1,0 +1,21 @@
+<div layout="row" layout-sm="column" layout-fill layout-wrap>
+	<md-card ng-repeat="workshop in workshops" class="md-whiteframe-z2" 
+						layout-padding flex-md="45" flex-sm="95" flex="30">
+		<md-card-content>
+			<md-toolbar layout="row">
+				<div class="md-toolbar-tools">
+					<span flex></span>
+					<h1>{{workshop.name}}</h1>
+					<span flex></span>
+				</div>
+			</md-toolbar>
+			<h4>Imparte: {{workshop.dr}}</h4>
+			<h6>{{workshop.day}} a las {{workshop.time}}</h6>
+			<p>{{workshop.description}}</p>
+			<div layout="row" layout-fill layout-wrap>
+				<md-button class="md-primary md-raised" flex>Ver lista</md-button>
+				<md-button class="md-primary md-raised" flex>Regístrate</md-button>
+			</div>
+		</md-card-content>
+	</md-card>
+</div>
