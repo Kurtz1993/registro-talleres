@@ -1,0 +1,36 @@
+<md-dialog flex="50" flex-md="75" flex-sm="100" aria-label="Registro" id="registration">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Registro</h2>
+      <span flex></span>
+    </div>
+  </md-toolbar>
+  <md-dialog-content>
+    <form name="registration">
+      <md-input-container flex>
+        <label>Número de cuenta</label>
+        <input type="text" ng-model="student.accountNumber" md-maxlength="8"
+               md-minlength="8" name="id" required pattern="^\d{1,8}$">
+        <div ng-messages="registration.id.$error">
+          <div ng-message="required">Este campo es requerido.</div>
+          <div ng-message="md-minglength, md-maxlength">El número de cuenta debe ser de 8 caracteres.</div>
+          <div ng-message="pattern">El número de cuenta sólo puede contener números.</div>
+        </div>
+      </md-input-container>
+      <md-input-container flex>
+        <label>Nombre completo</label>
+        <input type="text" ng-model="student.name" name="fullName" required pattern="^[A-Za-záéíóúñ\s]{1,}">
+        <div ng-messages="registration.fullName.$error">
+          <div ng-message="required">Este campo es requerido.</div>
+          <div ng-message="pattern">El nombre sólo puede contener letras.</div>
+        </div>
+      </md-input-container>
+    </form>
+  </md-dialog-content>
+  <div class="md-actions" layout="row">
+    <span flex></span>
+    <md-button class="md-primary md-raised" ng-click="dismissDialog()">Cancelar</md-button>
+		<md-button class="md-primary md-raised" ng-click="registerStudent()">Registrarse</md-button>
+    <span flex></span>
+  </div>
+</md-dialog>

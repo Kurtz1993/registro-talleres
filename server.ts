@@ -43,8 +43,28 @@ app.get('/api/workshops/:workshop/students', (req, res) => {
   });
 });
 
-app.post('/api/registrar', (req, res) => {
-  res.send(req.body);
+app.post('/api/register', (req, res) => {
+  var response = {
+    success: false,
+    data: "Ha ocurrido un error al intentar registrarse, por favor intenta de nuevo más tarde."
+  };
+  var student = req.body;
+  student.idTaller = parseInt(student.idTaller);
+  
+  Alumnos.find({idTaller: student.idTaller, accountNumber: student.accountNumber}).toArray((err, docs) =>{
+    if(docs.length === 0){
+      Alumnos.insert(req.body, (err, result) => {
+        if (!err) {
+          response.success = true;
+          response.data = "¡Te has registrado correctamente!";
+        }
+        res.send(response);
+      });
+    } else {
+      response.data = "Ya estás registrado en este taller.";
+      res.send(response);
+    }
+  });
 });
 // End API calls...
 

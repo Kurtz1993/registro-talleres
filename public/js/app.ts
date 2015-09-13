@@ -1,4 +1,4 @@
-angular.module('RegistroApp', ['ngRoute', 'ngMaterial', 'AppControllers', 'AppServices'])
+angular.module('RegistroApp', ['ngRoute', 'ngMaterial', 'ngMessages', 'AppControllers', 'AppServices'])
 .config(['$routeProvider', '$mdThemingProvider', ($routeProvider, $mdThemingProvider) => {
 	$mdThemingProvider.theme('default')
 		.primaryPalette('teal');
