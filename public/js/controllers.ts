@@ -15,7 +15,7 @@ angular.module('AppControllers', [])
 			Talleres.getStudentsByWorkshopId({id: workshop._id}).then((res) => {
 				workshop.available = true;
 				workshop.current = res.length;
-				if(workshop.current === workshop.total){
+				if(workshop.current >= workshop.total){
 					workshop.available = false;
 				}
 			});
