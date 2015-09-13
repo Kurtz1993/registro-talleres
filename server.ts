@@ -3,10 +3,14 @@ import express    = require('express');
 import path       = require('path');
 import mongo      = require('mongodb');
 import bodyParser = require('body-parser');
+import os   = require('os');
+
+var cpuCores:number = os.cpus().length;
 
 if(cluster.isMaster){
+  console.log("Server has " + cpuCores + " cores.");
   console.log("Initializing server instances...");
-  for(var i=0; i<5; i++){
+  for(var i=0; i<cpuCores; i++){
     cluster.fork();
   }
   cluster.on("online", () => {
@@ -85,7 +89,7 @@ if(cluster.isMaster){
   });
   // End API calls...
   
-  app.listen(3000, () => {
-    console.log("Listening at port 3000");
+  app.listen(4500, () => {
+    console.log("Listening at port 4500");
   });
 }
