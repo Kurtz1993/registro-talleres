@@ -1,80 +1,91 @@
+import cluster    = require('cluster');
 import express    = require('express');
 import path       = require('path');
 import mongo      = require('mongodb');
 import bodyParser = require('body-parser');
 
-var app                           = express();
-var MongoClient                   = mongo.MongoClient;
-var dbUrl:string                  = 'mongodb://localhost:27017/semanaMedico';
-var Talleres:mongo.Collection     = null;
-var Registro:mongo.Collection     = null;
-var Alumnos:mongo.Collection      = null;
-
-MongoClient.connect(dbUrl, (err, database) => {
-  if (err) {
-    console.log(err);
-  } else {
-    Talleres  = database.collection('talleres');
-    Registro  = database.collection('registro');
-    Alumnos   = database.collection('alumnos');
+if(cluster.isMaster){
+  console.log("Initializing server instances...");
+  for(var i=0; i<5; i++){
+    cluster.fork();
   }
-});
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Application path...
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-// API calls...
-app.get('/api/workshops', (req, res) => {
-  Talleres.find().toArray((err, docs) => {
-    if (err) { console.log(err); }
-    else { res.send(docs); }
+  cluster.on("online", () => {
+    console.log("Instance ready.");
   });
-});
-
-app.get('/api/workshops/:workshop/students', (req, res) => {
-  Alumnos.find({idTaller: parseInt(req.params.workshop)}).toArray((err, docs) => {
-    if (err) { console.log(err); }
-    else { res.send(docs); }
-  });
-});
-
-app.post('/api/register', (req, res) => {
-  var response = {
-    success: false,
-    data: "Ha ocurrido un error al intentar registrarse, por favor intenta de nuevo más tarde."
-  };
-  var student = req.body;
-  student.idTaller = parseInt(student.idTaller);
+} else {
+  var app                           = express();
+  var MongoClient                   = mongo.MongoClient;
+  var dbUrl:string                  = 'mongodb://localhost:27017/semanaMedico';
+  var Talleres:mongo.Collection     = null;
+  var Registro:mongo.Collection     = null;
+  var Alumnos:mongo.Collection      = null;
   
-  Alumnos.find({idTaller:student.idTaller}).toArray((err, docs)=>{
-    if(docs.length >= 15){
-      response.data = "El taller ya está lleno.";
-      res.send(response);
-    } else{
-      Alumnos.find({idTaller: student.idTaller, accountNumber: student.accountNumber}).toArray((err, docs) =>{
-        if(docs.length === 0){
-          Alumnos.insert(req.body, (err, result) => {
-            if (!err) {
-              response.success = true;
-              response.data = "¡Te has registrado correctamente!";
-            }
-            res.send(response);
-          });
-        } else {
-          response.data = "Ya estás registrado en este taller.";
-          res.send(response);
-        }
-      });
+  MongoClient.connect(dbUrl, (err, database) => {
+    if (err) {
+      console.log(err);
+    } else {
+      Talleres  = database.collection('talleres');
+      Registro  = database.collection('registro');
+      Alumnos   = database.collection('alumnos');
     }
   });
-});
-// End API calls...
-
-app.listen(3000, () => {
-  console.log("Listening at port 3000");
-});
+  
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(express.static(path.join(__dirname, 'public')));
+  
+  // Application path...
+  app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+  });
+  
+  // API calls...
+  app.get('/api/workshops', (req, res) => {
+    Talleres.find().toArray((err, docs) => {
+      if (err) { console.log(err); }
+      else { res.send(docs); }
+    });
+  });
+  
+  app.get('/api/workshops/:workshop/students', (req, res) => {
+    Alumnos.find({idTaller: parseInt(req.params.workshop)}).toArray((err, docs) => {
+      if (err) { console.log(err); }
+      else { res.send(docs); }
+    });
+  });
+  
+  app.post('/api/register', (req, res) => {
+    var response = {
+      success: false,
+      data: "Ha ocurrido un error al intentar registrarse, por favor intenta de nuevo más tarde."
+    };
+    var student = req.body;
+    student.idTaller = parseInt(student.idTaller);
+    
+    Alumnos.find({idTaller:student.idTaller}).toArray((err, docs)=>{
+      if(docs.length >= 15){
+        response.data = "El taller ya está lleno.";
+        res.send(response);
+      } else{
+        Alumnos.find({idTaller: student.idTaller, accountNumber: student.accountNumber}).toArray((err, docs) =>{
+          if(docs.length === 0){
+            Alumnos.insert(req.body, (err, result) => {
+              if (!err) {
+                response.success = true;
+                response.data = "¡Te has registrado correctamente!";
+              }
+              res.send(response);
+            });
+          } else {
+            response.data = "Ya estás registrado en este taller.";
+            res.send(response);
+          }
+        });
+      }
+    });
+  });
+  // End API calls...
+  
+  app.listen(3000, () => {
+    console.log("Listening at port 3000");
+  });
+}
