@@ -40,7 +40,7 @@ angular.module('AppControllers', [])
 				$scope.studentsList = res;
 			});
 			$scope.dismissDialog = () => {
-				$mdDialog.hide();
+				$mdDialog.cancel();
 			};
 		}
 	};
@@ -78,7 +78,7 @@ angular.module('AppControllers', [])
 			}
 			
 			$scope.dismissDialog = () => {
-				$mdDialog.hide();
+				$mdDialog.cancel();
 			};
 			
 			$scope.registerStudent = () =>{
@@ -134,7 +134,7 @@ angular.module('AppControllers', [])
 		function ShowMaterialCtrl ($scope, material) {
 			$scope.material = material;
 			$scope.dismissDialog = () => {
-				$mdDialog.hide();
+				$mdDialog.cancel();
 			};
 		}
 	};
