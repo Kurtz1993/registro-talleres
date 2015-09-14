@@ -1,18 +1,18 @@
-<md-dialog flex="50" flex-md="75" flex-sm="90" aria-label="Alumnos ya registrados">
+<md-dialog flex="50" flex-md="75" flex-sm="90" aria-label="Lista de material necesario">
   <md-toolbar>
     <div class="md-toolbar-tools">
-      <h2>Alumnos ya registrados</h2>
+      <h2>Material necesario para el taller</h2>
       <span flex></span>
     </div>
   </md-toolbar>
   <md-dialog-content>
     <md-list>
-      <md-list-item ng-if="studentsList.length === 0">
-        <p>No hay alumnos registrados...</p>
+      <md-list-item ng-if="material.length === 0">
+        <p>No se necesita material para este taller</p>
         <md-divider></md-divider>
       </md-list-item>
-      <md-list-item ng-repeat="student in studentsList">
-        <p>{{student.name}}</p>
+      <md-list-item ng-repeat="mat in material">
+        <p>{{mat.name}}</p>
       <md-divider></md-divider>
       </md-list-item>
     </md-list>

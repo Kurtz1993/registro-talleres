@@ -12,7 +12,13 @@
 			<h4>Imparte: {{workshop.dr}}</h4>
 			<h5>{{workshop.day}} a las {{workshop.time}}</h5>
 			<h5>Registrados: {{workshop.current}} / {{workshop.total}}</h5>
-			<h5>Objetivo:</h5>
+			<div>
+				<span>Objetivo:</span>
+				<md-button class="md-primary md-flat material pull-right"
+									 ng-click="showMaterial($index, $event)">
+									 Material
+				</md-button>
+			</div>
 			<p>{{workshop.description}}</p>
 			<div layout="row" layout-fill layout-wrap>
 				<md-button class="md-primary md-raised" ng-click="showStudentsList($index, $event)" flex>Ver lista</md-button>

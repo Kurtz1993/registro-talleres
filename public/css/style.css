@@ -43,3 +43,17 @@ md-dialog{
 	height: auto;
 	padding: 16px;
 }
+
+span.limit{
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.pull-right {
+	float: right;
+}
+
+.material{
+	position: relative;
+	top: -15px;
+}

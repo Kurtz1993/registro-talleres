@@ -119,5 +119,25 @@ angular.module('AppControllers', [])
 		}
 	};
 	
+	$scope.showMaterial = (workshopIndex, event) => {
+		var material = $scope.workshops[workshopIndex].material || [];
+		$mdDialog.show({
+			controller: ShowMaterialCtrl,
+			templateUrl: 'views/materialTemplate.html',
+			parent: angular.element(document.body),
+			targetEvent: event,
+			locals: {material: material},
+			bindToController: true,
+			clickOutsideToClose: true
+		});
+		
+		function ShowMaterialCtrl ($scope, material) {
+			$scope.material = material;
+			$scope.dismissDialog = () => {
+				$mdDialog.hide();
+			};
+		}
+	};
+	
 }])
 ;
