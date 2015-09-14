@@ -10,7 +10,6 @@ angular.module('AppControllers', [])
 	
 	Talleres.get().then((res) => {
 		$scope.workshops = res;
-		console.log($scope.workshops);
 		$scope.workshops.forEach((workshop, index) => {
 			Talleres.getStudentsByWorkshopId({id: workshop._id}).then((res) => {
 				workshop.available = true;

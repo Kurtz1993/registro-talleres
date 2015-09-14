@@ -37,3 +37,8 @@ md-dialog{
 		margin-right: 8px;
 	}
 }
+
+.md-toolbar-tools {
+	max-height: 400px;
+	padding: 16px;
+}
