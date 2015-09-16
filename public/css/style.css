@@ -61,3 +61,7 @@ span.limit{
 .center-text{
 	text-align: center;
 }
+
+md-input-container label, md-input-container .md-placeholder{
+	color: #777;
+}
