@@ -69,3 +69,7 @@ md-input-container label, md-input-container .md-placeholder{
 .with-lines{
 	white-space: pre-line;
 }
+
+.important{
+	font-weight: bold;
+}
