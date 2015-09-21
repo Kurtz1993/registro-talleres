@@ -65,26 +65,29 @@ if(cluster.isMaster){
     var student = req.body;
     student.idTaller = parseInt(student.idTaller);
     
-    Alumnos.find({idTaller:student.idTaller}).toArray((err, docs)=>{
-      if(docs.length >= 15){
-        response.data = "El taller ya está lleno.";
-        res.send(response);
-      } else{
-        Alumnos.find({idTaller: student.idTaller, accountNumber: student.accountNumber}).toArray((err, docs) =>{
-          if(docs.length === 0){
-            Alumnos.insert(req.body, (err, result) => {
-              if (!err) {
-                response.success = true;
-                response.data = "¡Te has registrado correctamente!";
-              }
+    Talleres.find({ _id: student.idTaller }).toArray((error, workshop) => {
+      var limit:number = workshop[0].total;
+      Alumnos.find({ idTaller: student.idTaller }).toArray((err, docs) => {
+        if (docs.length >= limit) {
+          response.data = "El taller ya está lleno.";
+          res.send(response);
+        } else {
+          Alumnos.find({ idTaller: student.idTaller, accountNumber: student.accountNumber }).toArray((err, docs) => {
+            if (docs.length === 0) {
+              Alumnos.insert(req.body, (err, result) => {
+                if (!err) {
+                  response.success = true;
+                  response.data = "¡Te has registrado correctamente!";
+                }
+                res.send(response);
+              });
+            } else {
+              response.data = "Ya estás registrado en este taller.";
               res.send(response);
-            });
-          } else {
-            response.data = "Ya estás registrado en este taller.";
-            res.send(response);
-          }
-        });
-      }
+            }
+          });
+        }
+      });
     });
   });
   // End API calls...
