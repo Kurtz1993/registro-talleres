@@ -94,6 +94,7 @@ angular.module('AppControllers', [])
 										.position('bottom right')
 										.hideDelay(5000)
 								);
+								alert(res.data);
 								$mdDialog.hide();
 							} else {
 								$mdToast.show(
@@ -102,6 +103,7 @@ angular.module('AppControllers', [])
 										.position('bottom right')
 										.hideDelay(5000)
 								);
+								alert("Error: " + res.data);
 							}
 						});
 					}else {
