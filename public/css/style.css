@@ -65,3 +65,7 @@ span.limit{
 md-input-container label, md-input-container .md-placeholder{
 	color: #777;
 }
+
+.with-lines{
+	white-space: pre-line;
+}
