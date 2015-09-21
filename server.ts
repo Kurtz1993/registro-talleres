@@ -72,18 +72,19 @@ if(cluster.isMaster){
           response.data = "El taller ya está lleno.";
           res.send(response);
         } else {
+          var serverResponse = response;
           Alumnos.find({ idTaller: student.idTaller, accountNumber: student.accountNumber }).toArray((err, docs) => {
             if (docs.length === 0) {
               Alumnos.insert(req.body, (err, result) => {
                 if (!err) {
-                  response.success = true;
-                  response.data = "¡Te has registrado correctamente!";
+                  serverResponse.success = true;
+                  serverResponse.data = "¡Te has registrado correctamente!";
                 }
-                res.send(response);
+                res.send(serverResponse);
               });
             } else {
-              response.data = "Ya estás registrado en este taller.";
-              res.send(response);
+              serverResponse.data = "Ya estás registrado en este taller.";
+              res.send(serverResponse);
             }
           });
         }
