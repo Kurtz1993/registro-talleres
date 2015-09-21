@@ -1,5 +1,6 @@
 {
   "name": "registro-talleres",
+  "version": "1.0.0",
   "description": "Registro a los talleres de la semana del médico.",
   "main": "app.js",
   "repository": {
@@ -16,5 +17,8 @@
     "body-parser": "^1.13.3",
     "express": "^4.13.3",
     "mongodb": "^2.0.42"
+  },
+  "scripts": {
+    "postinstall": "bower install && tsd install"
   }
 }

@@ -10,7 +10,7 @@ interface ITaller {
 }
 
 interface IAlumno {
-	_id: mongo.objectID,
+	_id: mongo.ObjectID,
 	name: string,
 	accountNumber:string,
 	idTaller: number
