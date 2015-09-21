@@ -104,6 +104,7 @@ angular.module('AppControllers', [])
 										.hideDelay(5000)
 								);
 								alert("Error: " + res.data);
+								$mdDialog.hide();
 							}
 						});
 					}else {
