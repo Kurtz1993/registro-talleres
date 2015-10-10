@@ -44,7 +44,7 @@ if(cluster.isMaster){
   
   // API calls...
   app.get('/api/workshops', (req, res) => {
-    Talleres.find().toArray((err, docs) => {
+    Talleres.find().sort({name:1}).toArray((err, docs) => {
       if (err) { console.log(err); }
       else { res.send(docs); }
     });
