@@ -5,7 +5,8 @@ import mongo      = require('mongodb');
 import bodyParser = require('body-parser');
 import os         = require('os');
 
-var cpuCores:number = os.cpus().length;
+ var cpuCores:number = os.cpus().length;
+//var cpuCores:number = 0.5;
 
 if(cluster.isMaster){
   console.log("Server has " + cpuCores + " cores.");
@@ -92,6 +93,10 @@ if(cluster.isMaster){
     });
   });
   // End API calls...
+  
+  app.use((req, res, next) => {
+    res.redirect('/');
+  });
   
   app.listen(4500, () => {
     console.log("Listening at port 4500");

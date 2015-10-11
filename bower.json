@@ -2,9 +2,9 @@
   "name": "registro-talleres",
   "description": "Registro a los talleres de la semana del médico.",
   "dependencies": {
-    "angular": "~1.4.5",
-    "angular-material": "~0.11.0",
-    "angular-messages": "~1.4.5",
-    "angular-route": "~1.4.5"
+    "angular-material": "~0.11.2",
+    "angular": "~1.4.7",
+    "angular-messages": "~1.4.7",
+    "angular-route": "~1.4.7"
   }
 }
