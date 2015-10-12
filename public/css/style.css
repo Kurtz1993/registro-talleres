@@ -3,6 +3,14 @@
 	color: #FFF;
 }
 
+.md-theme-indigo {
+	background: rgb(172,115,72) !important;
+}
+
+.md-theme-indigo h1 {
+	color: #FFF;
+}
+
 md-toolbar.md-default-theme {
 	background: rgb(244, 173, 119);
 	color: #000;
@@ -22,6 +30,15 @@ md-input-container:not(.md-input-invalid).md-input-focused.md-input {
 
 md-input-container:not(.md-input-invalid).md-input-focused label {
 	color: rgb(20, 128, 66);
+}
+
+#logo{
+	width: 100%;
+}
+
+.semester-link {
+	color: rgb(20, 128, 66);
+	text-decoration: none;
 }
 
 md-card{
