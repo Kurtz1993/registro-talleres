@@ -1,7 +1,7 @@
 angular.module('AppControllers', [])
 
 .controller('MainCtrl', ['$scope', ($scope) => {
-	$scope.title = 'Lista de talleres';
+	$scope.title = 'XXIX Semana del Médico D. en C. Luz Margarita Baltazar Rodríguez';
 }])
 
 .controller('HomeCtrl', ['$scope', '$mdDialog', 'Talleres', 'Registro', ($scope, $mdDialog, Talleres, Registro) => {

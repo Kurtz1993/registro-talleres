@@ -1,6 +1,27 @@
 .home-title{
-	background: #ED417B;
+	background: rgb(172,115,72);
 	color: #FFF;
+}
+
+md-toolbar.md-default-theme {
+	background: rgb(244, 173, 119);
+	color: #000;
+}
+
+button.md-default-theme.md-raised {
+	background: rgb(20, 128, 66) !important;
+}
+
+button.md-default-theme.md-flat {
+	color: rgb(20, 128, 66) !important;
+}
+
+md-input-container:not(.md-input-invalid).md-input-focused.md-input {
+	border-color: rgb(20, 128, 66);
+}
+
+md-input-container:not(.md-input-invalid).md-input-focused label {
+	color: rgb(20, 128, 66);
 }
 
 md-card{

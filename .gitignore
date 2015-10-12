@@ -3,3 +3,4 @@ public/lib/
 typings/
 *.js
 *.*.map
+*.db
