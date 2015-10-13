@@ -32,6 +32,11 @@ md-input-container:not(.md-input-invalid).md-input-focused label {
 	color: rgb(20, 128, 66);
 }
 
+md-tabs md-ink-bar {
+    color: rgb(20, 128, 66);
+    background: rgb(20, 128, 66);
+}
+
 #logo{
 	width: 100%;
 }
