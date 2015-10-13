@@ -64,8 +64,10 @@ else {
     };
     var student = req.body;
     student.idTaller = parseInt(student.idTaller);
-    var threshold = 1444829400790;
-    if (Date.now() >= threshold) {
+    var minThreshold = 1444829400790;
+    var maxThreshold = 1444874400790;
+    var now = Date.now();
+    if (now >= minThreshold && now <= maxThreshold) {
       Talleres.find({ _id: student.idTaller }).toArray(function (error, workshop) {
         var limit = workshop[0].total;
         Alumnos.find({ idTaller: student.idTaller }).toArray(function (err, docs) {
@@ -94,7 +96,7 @@ else {
         });
       });
     } else {
-      response.data = "¡La fecha de registro comienza el Miércoles 14 de Octubre a las 8:30 AM!"
+      response.data = "¡Los horarios de registro son de 8:30 AM a 9:00 PM!"
       res.send(response);
     }
   });
