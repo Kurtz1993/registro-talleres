@@ -7,6 +7,10 @@ angular.module('RegistroApp', ['ngRoute', 'ngMaterial', 'ngMessages', 'AppContro
         controller: 'HomeCtrl',
         templateUrl: 'views/home.html'
       })
+      .when('/talleres/:workshop', {
+        controller: 'WorkshopsCtrl',
+        templateUrl: 'views/workshops.html'
+      })
       .otherwise({
         redirectTo: '/home'
       });

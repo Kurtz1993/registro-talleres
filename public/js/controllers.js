@@ -1,6 +1,12 @@
 angular.module('AppControllers', [])
-  .controller('MainCtrl', ['$scope', function ($scope) {
+  .controller('MainCtrl', ['$scope', '$mdSidenav', function ($scope, $mdSidenav) {
     $scope.title = 'XXIX Semana del Médico D. en C. Luz Margarita Baltazar Rodríguez';
+    $scope.toggleMenu = function() {
+      $mdSidenav('left').open().then(function(){ console.log("Opened"); })
+    };
+  }])
+  .controller('WorkshopsCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
+    console.log($routeParams);
   }])
   .controller('HomeCtrl', ['$scope', '$mdDialog', 'Talleres', 'Registro', function ($scope, $mdDialog, Talleres, Registro) {
     $scope.workshops = null;
