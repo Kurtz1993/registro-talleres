@@ -6,7 +6,7 @@ angular.module('RegistroApp', ['ngRoute', 'ngMaterial', 'ngMessages', 'AppContro
 	$routeProvider
 		.when('/home', {
 			controller: 'HomeCtrl',
-			templateUrl: 'views/landing.html'
+			templateUrl: 'views/home.html'
 		})
 		.otherwise({
 			redirectTo: '/home'
