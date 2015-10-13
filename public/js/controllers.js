@@ -5,13 +5,11 @@ angular.module('AppControllers', [])
       $mdSidenav('left').open().then(function(){ console.log("Opened"); })
     };
   }])
-  .controller('WorkshopsCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
-    console.log($routeParams);
-  }])
-  .controller('HomeCtrl', ['$scope', '$mdDialog', 'Talleres', 'Registro', function ($scope, $mdDialog, Talleres, Registro) {
+  .controller('WorkshopsCtrl', ['$scope', '$routeParams', '$mdDialog', 'Talleres', 'Registro', 
+    function ($scope, $routeParams, $mdDialog, Talleres, Registro) {
     $scope.workshops = null;
     $scope.selectedWorkshop = null;
-    Talleres.get().then(function (res) {
+    Talleres.get($routeParams.semester).then(function (res) {
       $scope.workshops = res;
       $scope.workshops.forEach(function (workshop, index) {
         Talleres.getStudentsByWorkshopId({ id: workshop._id }).then(function (res) {
@@ -132,4 +130,6 @@ angular.module('AppControllers', [])
         };
       }
     };
+  }])
+  .controller('HomeCtrl', ['$scope', '$mdDialog', 'Talleres', 'Registro', function ($scope, $mdDialog, Talleres, Registro) {
   }]);

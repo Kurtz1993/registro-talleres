@@ -1,9 +1,9 @@
 angular.module('AppServices', [])
   .factory('Talleres', ['$http', '$q', function ($http, $q) {
     return {
-      get: function () {
+      get: function (semester) {
         var deferred = $q.defer();
-        $http.get('/api/workshops')
+        $http.get('/api/workshops/' + semester)
           .success(function (response) { deferred.resolve(response); })
           .error(function (error) { deferred.reject(error); });
         return deferred.promise;

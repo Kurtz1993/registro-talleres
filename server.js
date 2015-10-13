@@ -37,8 +37,8 @@ else {
     app.get('/', function (req, res) {
         res.sendFile(path.join(__dirname, 'index.html'));
     });
-    app.get('/api/workshops', function (req, res) {
-        Talleres.find().sort({ name: 1 }).toArray(function (err, docs) {
+    app.get('/api/workshops/:semester', function (req, res) {
+        Talleres.find({semester: parseInt(req.params.semester)}).sort({ name: 1 }).toArray(function (err, docs) {
             if (err) {
                 console.log(err);
             }

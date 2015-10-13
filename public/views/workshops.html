@@ -2,17 +2,71 @@
 	<md-tab label="Lunes y Martes">
 		<md-content class="md-padding">
 			<h1 class="md-display-1">Lista de talleres</h1>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis
-				vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur
-				felis nec, feugiat ultricies mi.</p>
+			<div layout="row" layout-sm="column" layout-fill layout-wrap>
+				<md-card ng-repeat="workshop in workshops | filter:{dayId:1}" ng-class-odd="'card-margin'" class="md-whiteframe-z2" layout-padding flex="95">
+					<md-card-content>
+						<md-toolbar layout="row">
+							<div class="md-toolbar-tools">
+								<span flex></span>
+								<h1>{{workshop.name}}</h1>
+								<span flex></span>
+							</div>
+						</md-toolbar>
+						<h4>Imparte: {{workshop.dr}}</h4>
+						<h5>{{workshop.day}} de {{workshop.time}}</h5>
+						<h5>Registrados: {{workshop.current}} / {{workshop.total}}</h5>
+						<h5>Lugar: {{workshop.place}}</h5>
+						<div>
+							<span>Objetivo:</span>
+							<md-button class="md-primary md-flat material pull-right" ng-click="showMaterial($index, $event)">
+								Material
+							</md-button>
+						</div>
+						<p class="with-lines">{{workshop.description}}</p>
+						<p class="important">{{workshop.important}}</p>
+						<md-divider></md-divider>
+						<div layout="row" layout-fill layout-wrap>
+							<md-button class="md-primary md-raised" ng-click="showStudentsList($index, $event)" flex>Ver lista</md-button>
+							<md-button ng-if="workshop.available" class="md-primary md-raised" ng-click="showRegistration($index, $event)" flex>Regístrate</md-button>
+						</div>
+					</md-card-content>
+				</md-card>
+			</div>
 		</md-content>
 	</md-tab>
 	<md-tab label="Miércoles y Jueves">
 		<md-content class="md-padding">
 			<h1 class="md-display-1">Lista de talleres</h1>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis
-				vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur
-				felis nec, feugiat ultricies mi.</p>
+			<div layout="row" layout-sm="column" layout-fill layout-wrap>
+				<md-card ng-repeat="workshop in workshops | filter:{dayId:2}" ng-class-odd="'card-margin'" class="md-whiteframe-z2" layout-padding flex="95">
+					<md-card-content>
+						<md-toolbar layout="row">
+							<div class="md-toolbar-tools">
+								<span flex></span>
+								<h1>{{workshop.name}}</h1>
+								<span flex></span>
+							</div>
+						</md-toolbar>
+						<h4>Imparte: {{workshop.dr}}</h4>
+						<h5>{{workshop.day}} de {{workshop.time}}</h5>
+						<h5>Registrados: {{workshop.current}} / {{workshop.total}}</h5>
+						<h5>Lugar: {{workshop.place}}</h5>
+						<div>
+							<span>Objetivo:</span>
+							<md-button class="md-primary md-flat material pull-right" ng-click="showMaterial($index, $event)">
+								Material
+							</md-button>
+						</div>
+						<p class="with-lines">{{workshop.description}}</p>
+						<p class="important">{{workshop.important}}</p>
+						<md-divider></md-divider>
+						<div layout="row" layout-fill layout-wrap>
+							<md-button class="md-primary md-raised" ng-click="showStudentsList($index, $event)" flex>Ver lista</md-button>
+							<md-button ng-if="workshop.available" class="md-primary md-raised" ng-click="showRegistration($index, $event)" flex>Regístrate</md-button>
+						</div>
+					</md-card-content>
+				</md-card>
+			</div>
 		</md-content>
 	</md-tab>
 </md-tabs>

@@ -4,10 +4,9 @@ angular.module('RegistroApp', ['ngRoute', 'ngMaterial', 'ngMessages', 'AppContro
       .primaryPalette('teal');
     $routeProvider
       .when('/home', {
-        controller: 'HomeCtrl',
         templateUrl: 'views/home.html'
       })
-      .when('/talleres/:workshop', {
+      .when('/talleres/:semester', {
         controller: 'WorkshopsCtrl',
         templateUrl: 'views/workshops.html'
       })
