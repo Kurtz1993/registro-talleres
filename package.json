@@ -19,6 +19,7 @@
     "mongodb": "^2.0.42"
   },
   "scripts": {
-    "postinstall": "bower install --force && tsd install"
+    "postinstall": "bower install --force",
+    "get-typings": "tsd install"
   }
 }
