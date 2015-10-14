@@ -9,7 +9,8 @@ angular.module('AppControllers', [])
     function ($scope, $routeParams, $mdDialog, Talleres, Registro) {
     $scope.workshops = null;
     $scope.selectedWorkshop = null;
-    Talleres.get($routeParams.semester).then(function (res) {
+    $scope.semester = $routeParams.semester;
+    Talleres.get($scope.semester).then(function (res) {
       $scope.workshops = res;
       $scope.workshops.forEach(function (workshop, index) {
         Talleres.getStudentsByWorkshopId({ id: workshop._id }).then(function (res) {
@@ -21,8 +22,28 @@ angular.module('AppControllers', [])
         });
       });
     });
+    
+    // Utility
+    
+    function getWorkshopId(workshopIndex){
+      for (var i = 0; i<$scope.workshops.length; i++){
+        if($scope.workshops[i]._id === workshopIndex){
+          return $scope.workshops[i]._id;
+        }
+      }
+    }
+    
+    function getWorkshopMaterial(workshopIndex){
+      for (var i = 0; i<$scope.workshops.length; i++){
+        if($scope.workshops[i]._id === workshopIndex){
+          return $scope.workshops[i].material;
+        }
+      }
+    }
+    
     $scope.showStudentsList = function (workshopIndex, event) {
-      var id = $scope.workshops[workshopIndex]._id;
+      var id = getWorkshopId(workshopIndex);
+      
       $mdDialog.show({
         controller: StudentsListCtrl,
         templateUrl: 'views/studentsListTemplate.html',
@@ -43,13 +64,13 @@ angular.module('AppControllers', [])
       }
     };
     $scope.showRegistration = function (workshopIndex, event) {
-      var id = $scope.workshops[workshopIndex]._id;
+      var id = getWorkshopId(workshopIndex);
       $mdDialog.show({
         controller: RegistrationCtrl,
         templateUrl: 'views/registrationFormTemplate.html',
         parent: angular.element(document.body),
         targetEvent: event,
-        locals: { workshopId: id },
+        locals: { workshopId: id, semester: $scope.semester },
         bindToController: true,
         clickOutsideToClose: true
       }).then(function () {
@@ -66,11 +87,12 @@ angular.module('AppControllers', [])
           });
         });
       });
-      function RegistrationCtrl($scope, $mdDialog, $mdToast, Registro, workshopId) {
+      function RegistrationCtrl($scope, $route, $mdDialog, $mdToast, Registro, workshopId, semester) {
         $scope.student = {
           accountNumber: "",
           name: "",
-          idTaller: workshopId
+          idTaller: workshopId,
+          semester: semester
         };
         $scope.dismissDialog = function () {
           $mdDialog.cancel();
@@ -82,22 +104,23 @@ angular.module('AppControllers', [])
             if (yes) {
               Registro.post($scope.student).then(function (res) {
                 if (res.success) {
+                  alert(res.data);
                   $mdToast.show($mdToast.simple()
                     .content(res.data)
                     .position('bottom right')
                     .hideDelay(5000));
-                  alert(res.data);
                   $mdDialog.hide();
                 }
                 else {
+                  alert("Error: " + res.data);
                   $mdToast.show($mdToast.simple()
                     .content("Error: " + res.data)
                     .position('bottom right')
                     .hideDelay(5000));
-                  alert("Error: " + res.data);
                   $mdDialog.hide();
                 }
               });
+              $route.reload();
             }
             else {
               $mdDialog.hide();
@@ -113,7 +136,7 @@ angular.module('AppControllers', [])
       }
     };
     $scope.showMaterial = function (workshopIndex, event) {
-      var material = $scope.workshops[workshopIndex].material || [];
+      var material = getWorkshopMaterial(workshopIndex) || [];
       $mdDialog.show({
         controller: ShowMaterialCtrl,
         templateUrl: 'views/materialTemplate.html',

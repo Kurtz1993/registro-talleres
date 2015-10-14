@@ -18,7 +18,7 @@
 						<h5>Lugar: {{workshop.place}}</h5>
 						<div>
 							<span>Objetivo:</span>
-							<md-button class="md-primary md-flat material pull-right" ng-click="showMaterial($index, $event)">
+							<md-button class="md-primary md-flat material pull-right" ng-click="showMaterial(workshop._id, $event)">
 								Material
 							</md-button>
 						</div>
@@ -26,8 +26,8 @@
 						<p class="important">{{workshop.important}}</p>
 						<md-divider></md-divider>
 						<div layout="row" layout-fill layout-wrap>
-							<md-button class="md-primary md-raised" ng-click="showStudentsList($index, $event)" flex>Ver lista</md-button>
-							<md-button ng-if="workshop.available" class="md-primary md-raised" ng-click="showRegistration($index, $event)" flex>Regístrate</md-button>
+							<md-button class="md-primary md-raised" ng-click="showStudentsList(workshop._id, $event)" flex>Ver lista</md-button>
+							<md-button ng-if="workshop.available" class="md-primary md-raised" ng-click="showRegistration(workshop._id, $event)" flex>Regístrate</md-button>
 						</div>
 					</md-card-content>
 				</md-card>
@@ -53,7 +53,7 @@
 						<h5>Lugar: {{workshop.place}}</h5>
 						<div>
 							<span>Objetivo:</span>
-							<md-button class="md-primary md-flat material pull-right" ng-click="showMaterial($index, $event)">
+							<md-button class="md-primary md-flat material pull-right" ng-click="showMaterial(workshop._id, $event)">
 								Material
 							</md-button>
 						</div>
@@ -61,8 +61,8 @@
 						<p class="important">{{workshop.important}}</p>
 						<md-divider></md-divider>
 						<div layout="row" layout-fill layout-wrap>
-							<md-button class="md-primary md-raised" ng-click="showStudentsList($index, $event)" flex>Ver lista</md-button>
-							<md-button ng-if="workshop.available" class="md-primary md-raised" ng-click="showRegistration($index, $event)" flex>Regístrate</md-button>
+							<md-button class="md-primary md-raised" ng-click="showStudentsList(workshop._id, $event)" flex>Ver lista</md-button>
+							<md-button ng-if="workshop.available" class="md-primary md-raised" ng-click="showRegistration(workshop._id, $event)" flex>Regístrate</md-button>
 						</div>
 					</md-card-content>
 				</md-card>

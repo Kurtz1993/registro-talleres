@@ -63,11 +63,22 @@ else {
       data: "Ha ocurrido un error al intentar registrarse, por favor intenta de nuevo más tarde."
     };
     var student = req.body;
+    student.semester = parseInt(student.semester);
     student.idTaller = parseInt(student.idTaller);
-    var minThreshold = 1444829400790;
-    var maxThreshold = 1444874400790;
+    var firstMinThreshold = 1444829400790;
+    var firstMaxThreshold = 1444874400790;
+    var thirdMinThreshold = 1444915800790;
+    var thirdMaxThreshold = 1444960800790;
+    var fifthMinThreshold = 1445002200790;
+    var fifthMaxThreshold = 1445047200790;
     var now = Date.now();
-    if (now >= minThreshold && now <= maxThreshold) {
+    /**
+     * Register a student with the given student object
+     * @param student Object: The object that contains student info.
+     * @param res Object: Express.js response object.
+     * @param response: Object: The response object that the server will send to the API call.
+     */
+    function register(student, res, response) {
       Talleres.find({ _id: student.idTaller }).toArray(function (error, workshop) {
         var limit = workshop[0].total;
         Alumnos.find({ idTaller: student.idTaller }).toArray(function (err, docs) {
@@ -95,8 +106,38 @@ else {
           }
         });
       });
+    }
+
+    if (((now >= firstMinThreshold && now <= firstMaxThreshold) && student.semester === 1) ||
+      ((now >= thirdMinThreshold && now <= thirdMaxThreshold) && student.semester === 3) ||
+      ((now >= fifthMinThreshold && now <= fifthMaxThreshold) && student.semester === 5)) {
+      delete student.semester;
+      if (student.idTaller === 42) {
+        // id 29
+        Alumnos.find({ idTaller: 29, accountNumber: student.accountNumber }).toArray(function (err, docs) {
+          if (docs.length > 0) {
+            register(student, res, response);
+          } else {
+            response.data = "No puedes registrarte debido a que no participaste en el taller anterior.";
+            res.send(response);
+          }
+        });
+      } else {
+        register(student, res, response);
+      }
+
     } else {
-      response.data = "¡Los horarios de registro son de 8:30 AM a 9:00 PM!"
+      switch (student.semester) {
+        case 1:
+          response.data = "¡El horario de registro para primer semestre es el Miércoles 14 de Octubre de 8:30 AM a 9:00 PM!"
+          break;
+        case 3:
+          response.data = "¡El horario de registro para tercer semestre es el Jueves 15 de Octubre de 8:30 AM a 9:00 PM!"
+          break;
+        case 5:
+          response.data = "¡El horario de registro para quinto semestre es el Viernes 16 de Octubre de 8:30 AM a 9:00 PM!"
+          break;
+      }
       res.send(response);
     }
   });
