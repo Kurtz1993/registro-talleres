@@ -137,13 +137,13 @@ else {
     } else {
       switch (student.semester) {
         case 1:
-          response.data = "¡El horario de registro para primer semestre es el Miércoles 14 de Octubre de 8:30 AM a 9:00 PM!"
+          response.data = "¡El horario de registro para primer semestre es el Jueves 15 de Octubre de 2:00 PM a 12:00 AM!"
           break;
         case 3:
-          response.data = "¡El horario de registro para tercer semestre es el Jueves 15 de Octubre de 8:30 AM a 9:00 PM!"
+          response.data = "¡El horario de registro para tercer semestre es el Jueves 15 de Octubre de 2:00 PM a 12:00 AM!"
           break;
         case 5:
-          response.data = "¡El horario de registro para quinto semestre es el Viernes 16 de Octubre de 8:30 AM a 9:00 PM!"
+          response.data = "¡El horario de registro para quinto semestre es el Viernes 16 de Octubre de 2:00 PM a 12:00 AM!"
           break;
       }
       res.send(response);
