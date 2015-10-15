@@ -46,6 +46,10 @@ md-tabs md-ink-bar {
 	text-decoration: none;
 }
 
+.student-item {
+	text-transform: capitalize;
+}
+
 md-card{
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;

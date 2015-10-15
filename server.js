@@ -6,7 +6,6 @@ var bodyParser = require('body-parser');
 var os = require('os');
 var cpuCores = os.cpus().length;
 if (cluster.isMaster) {
-  console.log("Server has " + cpuCores + " cores.");
   console.log("Initializing server instances...");
   for (var i = 0; i < cpuCores * 2; i++) {
     cluster.fork();
@@ -65,12 +64,12 @@ else {
     var student = req.body;
     student.semester = parseInt(student.semester);
     student.idTaller = parseInt(student.idTaller);
-    var firstMinThreshold = 1444829400790;
-    var firstMaxThreshold = 1444874400790;
-    var thirdMinThreshold = 1444915800790;
-    var thirdMaxThreshold = 1444960800790;
-    var fifthMinThreshold = 1445002200790;
-    var fifthMaxThreshold = 1445047200790;
+    var firstMinThreshold = 1444935600790;
+    var firstMaxThreshold = 1444971600790;
+    var thirdMinThreshold = 1444935600790;
+    var thirdMaxThreshold = 1444971600790;
+    var fifthMinThreshold = 1445022000790;
+    var fifthMaxThreshold = 1445058000790;
     var now = Date.now();
     /**
      * Register a student with the given student object
@@ -81,6 +80,7 @@ else {
     function register(student, res, response) {
       Talleres.find({ _id: student.idTaller }).toArray(function (error, workshop) {
         var limit = workshop[0].total;
+        student.dayId = workshop[0].dayId;
         Alumnos.find({ idTaller: student.idTaller }).toArray(function (err, docs) {
           if (docs.length >= limit) {
             response.data = "El taller ya está lleno.";
@@ -90,12 +90,21 @@ else {
             var serverResponse = response;
             Alumnos.find({ idTaller: student.idTaller, accountNumber: student.accountNumber }).toArray(function (err, docs) {
               if (docs.length === 0) {
-                Alumnos.insert(req.body, function (err, result) {
-                  if (!err) {
-                    serverResponse.success = true;
-                    serverResponse.data = "¡Te has registrado correctamente!";
+                Alumnos.find({accountNumber:student.accountNumber, dayId: student.dayId}).toArray(function(err, docs){
+                  var respuesta = serverResponse;
+                  var servidor = res;
+                  if(docs.length === 0){
+                    Alumnos.insert(req.body, function (err, result) {
+                      if (!err) {
+                        respuesta.success = true;
+                        respuesta.data = "¡Te has registrado correctamente!";
+                      }
+                      servidor.send(respuesta);
+                    });
+                  } else {
+                    serverResponse.data = "¡Ya te has registrado a un taller para estos días!";
+                    res.send(serverResponse);
                   }
-                  res.send(serverResponse);
                 });
               }
               else {
@@ -111,9 +120,8 @@ else {
     if (((now >= firstMinThreshold && now <= firstMaxThreshold) && student.semester === 1) ||
       ((now >= thirdMinThreshold && now <= thirdMaxThreshold) && student.semester === 3) ||
       ((now >= fifthMinThreshold && now <= fifthMaxThreshold) && student.semester === 5)) {
-      delete student.semester;
       if (student.idTaller === 42) {
-        // id 29
+        student.timestamp = Date.now();
         Alumnos.find({ idTaller: 29, accountNumber: student.accountNumber }).toArray(function (err, docs) {
           if (docs.length > 0) {
             register(student, res, response);
