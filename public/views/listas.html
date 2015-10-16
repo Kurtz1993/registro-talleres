@@ -1,0 +1,39 @@
+<md-content class="md-padding">
+	<h1>Talleres</h1>
+	<div id="filters">
+    <label>Filtrar por día:</label>    
+		<md-select ng-model="filter.day" placeholder="Selecciona el día">
+			<md-option ng-repeat="day in days" value="{{day.id}}">
+				{{day.name}}
+			</md-option>
+		</md-select>
+		<label>Filtrar por semestre:</label>    
+		<md-select ng-model="filter.semester" placeholder="Selecciona el semestre">
+			<md-option ng-repeat="semester in semesters" value="{{semester}}">
+				{{semester}}
+			</md-option>
+		</md-select>
+	</div>
+	<div layout="row" layout-sm="column" layout-fill layout-wrap>
+		<md-card ng-repeat="workshop in workshops | filter:{dayId: filter.day, semester: filter.semester}" ng-class-odd="'card-margin'" class="md-whiteframe-z2" layout-padding
+		flex="45">
+			<md-card-content>
+				<md-toolbar layout="row">
+					<div class="md-toolbar-tools">
+						<span flex></span>
+						<h1>{{workshop.name}}</h1>
+						<span flex></span>
+					</div>
+				</md-toolbar>
+				<h4>Imparte: {{workshop.dr}}</h4>
+				<h5>{{workshop.day}} de {{workshop.time}}</h5>
+				<h5>Registrados: {{workshop.current}} / {{workshop.total}}</h5>
+				<h5>Lugar: {{workshop.place}}</h5>
+				<md-divider></md-divider>
+				<div layout="row" layout-fill layout-wrap>
+					<md-button class="md-primary md-raised" ng-href="#/listas/{{workshop._id}}" flex>Generar Lista</md-button>
+				</div>
+			</md-card-content>
+		</md-card>
+	</div>
+</md-content>

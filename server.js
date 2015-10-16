@@ -36,6 +36,36 @@ else {
   app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, 'index.html'));
   });
+  app.get('/api/workshops', function (req, res){
+    var response = {
+      success: false,
+      data: null
+    };
+    Talleres.find().sort({ name: 1 }).toArray(function (err, docs){
+      if(err){
+        response.data = "Ha ocurrido un error. Por favor intenta de nuevo más tarde.";
+      } else {
+        response.success = true;
+        response.data = docs;
+      }
+      res.send(response);
+    });
+  });
+  app.get('/api/workshop/:id', function (req, res){
+    var response = {
+      success: false,
+      data: null
+    };
+    Talleres.find({ _id: parseInt(req.params.id) }).sort({ name: 1 }).toArray(function (err, docs){
+      if(err){
+        response.data = "Ha ocurrido un error. Por favor intenta de nuevo más tarde.";
+      } else {
+        response.success = true;
+        response.data = docs[0];
+      }
+      res.send(response);
+    });
+  });
   app.get('/api/workshops/:semester', function (req, res) {
     Talleres.find({ semester: parseInt(req.params.semester) }).sort({ name: 1 }).toArray(function (err, docs) {
       if (err) {

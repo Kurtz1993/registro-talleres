@@ -21,39 +21,40 @@
 		</div>
 	</md-toolbar>
 	<div layout="row" flex>
-		<md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-			<md-toolbar class="md-theme-indigo">
-				<h1 class="md-toolbar-tools">Selecciona tu semestre</h1>
-			</md-toolbar>
-			<md-content layout-padding>
-				<md-list>
-					<md-list-item>
-						<a ng-href="#/talleres/1" class="semester-link" href="#/talleres/1">
-							<h3>1er Semestre</h3>
-						</a>
-					</md-list-item>
-					<md-divider></md-divider>
-					<md-list-item>
-						<a ng-href="#/talleres/3" class="semester-link" href="#/talleres/3">
-							<h3>3er Semestre</h3>
-						</a>
-					</md-list-item>
-					<md-divider></md-divider>
-					<md-list-item>
-						<a ng-href="#/talleres/5" class="semester-link" href="#/talleres/5">
-							<h3>5to Semestre</h3>
-						</a>
-					</md-list-item>
-					<md-divider></md-divider>
-				</md-list>
-			</md-content>
-		</md-sidenav>
-
+		<div class="no-print disappear">
+			<md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+				<md-toolbar class="md-theme-indigo">
+					<h1 class="md-toolbar-tools">Selecciona tu semestre</h1>
+				</md-toolbar>
+				<md-content layout-padding>
+					<md-list>
+						<md-list-item>
+							<a ng-href="#/talleres/1" class="semester-link" href="#/talleres/1">
+								<h3>1er Semestre</h3>
+							</a>
+						</md-list-item>
+						<md-divider></md-divider>
+						<md-list-item>
+							<a ng-href="#/talleres/3" class="semester-link" href="#/talleres/3">
+								<h3>3er Semestre</h3>
+							</a>
+						</md-list-item>
+						<md-divider></md-divider>
+						<md-list-item>
+							<a ng-href="#/talleres/5" class="semester-link" href="#/talleres/5">
+								<h3>5to Semestre</h3>
+							</a>
+						</md-list-item>
+						<md-divider></md-divider>
+					</md-list>
+				</md-content>
+			</md-sidenav>
+		</div>
 		<div flex ng-view>
 
 		</div>
 
-		<div flex="30" hide-sm>
+		<div flex="30" hide-sm class="no-print disappear">
 			<img id="logo" src="img/logo.jpg" alt="Logotipo">
 		</div>
 	</div>

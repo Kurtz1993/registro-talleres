@@ -10,6 +10,14 @@ angular.module('RegistroApp', ['ngRoute', 'ngMaterial', 'ngMessages', 'AppContro
         controller: 'WorkshopsCtrl',
         templateUrl: 'views/workshops.html'
       })
+      .when('/listas', {
+        controller: 'ListasCtrl',
+        templateUrl: 'views/listas.html'
+      })
+      .when('/listas/:idTaller', {
+        controller: 'GenerarListaCtrl',
+        templateUrl: 'views/listaGenerada.html'
+      })
       .otherwise({
         redirectTo: '/home'
       });

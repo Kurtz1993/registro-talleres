@@ -10,7 +10,7 @@ angular.module('AppControllers', [])
     $scope.workshops = null;
     $scope.selectedWorkshop = null;
     $scope.semester = $routeParams.semester;
-    Talleres.get($scope.semester).then(function (res) {
+    Talleres.getBySemester($scope.semester).then(function (res) {
       $scope.workshops = res;
       $scope.workshops.forEach(function (workshop, index) {
         Talleres.getStudentsByWorkshopId({ id: workshop._id }).then(function (res) {
@@ -74,7 +74,7 @@ angular.module('AppControllers', [])
         bindToController: true,
         clickOutsideToClose: true
       }).then(function () {
-        Talleres.get().then(function (res) {
+        Talleres.getBySemester().then(function (res) {
           $scope.workshops = res;
           $scope.workshops.forEach(function (workshop, index) {
             Talleres.getStudentsByWorkshopId({ id: workshop._id }).then(function (res) {
@@ -154,5 +154,58 @@ angular.module('AppControllers', [])
       }
     };
   }])
-  .controller('HomeCtrl', ['$scope', '$mdDialog', 'Talleres', 'Registro', function ($scope, $mdDialog, Talleres, Registro) {
+  .controller('ListasCtrl', ['$scope', 'Talleres', function ($scope, Talleres) {
+    $scope.workshops = null;
+    $scope.days = [
+      {
+        name:"Lunes y Martes",
+        id: 1
+      },{
+        name:"Miércoles y Jueves",
+        id: 2  
+      }
+    ];
+    $scope.semesters = [1,3,5];
+    var elements = document.getElementsByClassName('disappear');
+    for(var i = 0; i<elements.length; i++){
+      elements[i].style.display = "none";
+    }
+    Talleres.getAll().then(function (res) {
+      if(res.success){
+        $scope.workshops = res.data;
+        $scope.workshops.forEach(function (workshop, index) {
+          Talleres.getStudentsByWorkshopId({ id: workshop._id }).then(function (res) {
+            workshop.available = true;
+            workshop.current = res.length;
+            if (workshop.current >= workshop.total) {
+              workshop.available = false;
+            }
+          });
+        });
+      } else {
+        alert(res.data);
+      }
+    });
+  }])
+  .controller('GenerarListaCtrl', ['$scope', '$routeParams', 'Talleres', function($scope, $routeParams, Talleres){
+    var workshopId = parseInt($routeParams.idTaller);
+    var elements = document.getElementsByClassName('disappear');
+    for(var i = 0; i<elements.length; i++){
+      elements[i].style.display = "none";
+    }
+    $scope.students = null;
+    $scope.workshop = null;
+    Talleres.get(workshopId).then(function(res){
+      if(res.success){
+        $scope.workshop = res.data;
+      } else {
+        alert(res.data);
+      }
+    });
+    
+    Talleres.getStudentsByWorkshopId({id: workshopId}).then(function(res){
+      $scope.students = res;
+      console.log(res);
+    });
+    
   }]);

@@ -120,3 +120,12 @@ md-input-container label, md-input-container .md-placeholder{
 .important{
 	font-weight: bold;
 }
+
+@media print
+{    
+	.no-print, .no-print *
+	{
+		display: none !important;
+	}
+	@page { size: landscape; }
+}

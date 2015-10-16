@@ -1,7 +1,14 @@
 angular.module('AppServices', [])
   .factory('Talleres', ['$http', '$q', function ($http, $q) {
     return {
-      get: function (semester) {
+      get: function (id) {
+        var deferred = $q.defer();
+        $http.get('/api/workshop/' + id)
+          .success(function (response) { deferred.resolve(response); })
+          .error(function (error) { deferred.reject(error); });
+        return deferred.promise;
+      },
+      getBySemester: function (semester) {
         var deferred = $q.defer();
         $http.get('/api/workshops/' + semester)
           .success(function (response) { deferred.resolve(response); })
@@ -14,6 +21,13 @@ angular.module('AppServices', [])
           .success(function (response) { deferred.resolve(response); })
           .error(function (error) { deferred.reject(error); });
         return deferred.promise;
+      },
+      getAll: function (){
+        var deferred = $q.defer();
+        $http.get('/api/workshops')
+          .success(function (response) { deferred.resolve(response); })
+          .error(function (err) { deferred.reject(err); });
+          return deferred.promise;
       }
     };
   }])
