@@ -46,6 +46,11 @@ md-tabs md-ink-bar {
 	text-decoration: none;
 }
 
+#the-button{
+	margin:auto;
+	text-align: center;
+}
+
 md-card{
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
