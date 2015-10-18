@@ -46,10 +46,6 @@ md-tabs md-ink-bar {
 	text-decoration: none;
 }
 
-.student-item {
-	text-transform: capitalize;
-}
-
 md-card{
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -119,6 +115,47 @@ md-input-container label, md-input-container .md-placeholder{
 
 .important{
 	font-weight: bold;
+}
+
+#lista {
+	width:88%;
+	margin: auto;
+	font-size:14px;
+	line-height: 20px;
+}
+
+.capitalize{
+	text-transform: capitalize;
+}
+
+#lista .label{
+	font-weight: bold;
+	margin-right: 3px;
+}
+
+#lista .text-right {
+	text-align: right;
+}
+
+#list-heading {
+	margin-top: 10px;
+	font-weight: bold;
+	border-bottom: 2px solid black;
+}
+
+.list-border:nth-child(2), .list-border:nth-child(3), .list-border:nth-child(4){
+	border-left: 1px solid black
+}
+
+.student-name {
+	box-sizing: border-box;
+	padding-left: 10px;
+}
+
+#print-button {
+	position:absolute;
+	top: 88%;
+	left:94%
 }
 
 @media print

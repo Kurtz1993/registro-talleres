@@ -187,7 +187,7 @@ angular.module('AppControllers', [])
       }
     });
   }])
-  .controller('GenerarListaCtrl', ['$scope', '$routeParams', 'Talleres', function($scope, $routeParams, Talleres){
+  .controller('GenerarListaCtrl', ['$scope', '$routeParams', '$window', 'Talleres', function($scope, $routeParams, $window, Talleres){
     var workshopId = parseInt($routeParams.idTaller);
     var elements = document.getElementsByClassName('disappear');
     for(var i = 0; i<elements.length; i++){
@@ -195,9 +195,12 @@ angular.module('AppControllers', [])
     }
     $scope.students = null;
     $scope.workshop = null;
+    $scope.dias = null;
+    $scope.encargado = prompt("Nombre del encargado del taller: ");
     Talleres.get(workshopId).then(function(res){
       if(res.success){
         $scope.workshop = res.data;
+        $scope.dias = res.data.day.split(" y ");
       } else {
         alert(res.data);
       }
@@ -205,7 +208,9 @@ angular.module('AppControllers', [])
     
     Talleres.getStudentsByWorkshopId({id: workshopId}).then(function(res){
       $scope.students = res;
-      console.log(res);
     });
     
+    $scope.print = function() {
+      $window.print();
+    };
   }]);

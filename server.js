@@ -5,7 +5,7 @@ var mongo = require('mongodb');
 var bodyParser = require('body-parser');
 var os = require('os');
 var cpuCores = os.cpus().length;
-if (cluster.isMaster) {
+/*if (cluster.isMaster) {
   console.log("Initializing server instances...");
   for (var i = 0; i < cpuCores * 2; i++) {
     cluster.fork();
@@ -14,7 +14,7 @@ if (cluster.isMaster) {
     console.log("Instance ready.");
   });
 }
-else {
+else {*/
   var app = express();
   var MongoClient = mongo.MongoClient;
   var dbUrl = 'mongodb://localhost:27017/semanaMedico';
@@ -185,4 +185,4 @@ else {
   app.listen(4500, function () {
     console.log("Listening at port 4500");
   });
-}
+//}

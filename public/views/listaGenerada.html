@@ -1,6 +1,39 @@
-<table>
-	<th></th>
-	<tr ng-repeat="student in students">
-		<td>{{student.name}}</td>
-	</tr>
-</table>
+<div id="lista" layout-wrap layout="row" layout-fill layout-padding>
+	<div flex="85">
+		<span class="label">Taller: </span>{{workshop.name}}
+	</div>
+	<div flex="15" class="text-right">
+		<span class="label">Semestre: </span>{{workshop.semester}}
+	</div>
+	<div flex="100">
+		<span class="label">Impartido por: </span>{{workshop.dr}}
+	</div>
+	<div flex="100">
+		<span class="label">Días: </span>{{workshop.day}}
+	</div>
+	<div flex="100" class="capitalize">
+		<span class="label">Encargado: </span>{{encargado.toLowerCase()}}
+	</div>
+
+	<div id="list-heading" layout="row" layout-wrap layout-fill>
+		<!-- List heading -->
+		<div class="list-border center-text" flex="15">
+			N° de cuenta
+		</div>
+		<div class="list-border center-text" flex="55">
+			Nombre
+		</div>
+		<div class="list-border center-text" flex ng-repeat="dia in dias">
+			{{dia}}
+		</div>
+	</div>
+	<!-- List body -->
+	<div id="list-body" ng-repeat="student in students" layout="row" layout-wrap layout-fill>
+		<div class="list-border center-text" flex="15">{{student.accountNumber}}</div>
+		<div class="list-border student-name capitalize" flex="55">{{student.name.toLowerCase()}}</div>
+		<div class="list-border" flex ng-repeat="dia in dias"></div>
+	</div>
+</div>
+<md-button id="print-button" class="md-fab md-primary no-print" ng-click="print()">
+	<md-icon md-svg-src="img/printer.svg"></md-icon>
+</md-button>
